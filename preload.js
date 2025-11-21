@@ -23,4 +23,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
   // Opens the native "Save File" dialog and passes the text content.
   saveFile: (content) => ipcRenderer.invoke('dialog:saveFile', content),
+
+  // Allow renderer to trigger quit
+  quitApp: () => ipcRenderer.invoke('app:quit'),
 });

@@ -112,3 +112,47 @@ toolbarButtons.forEach((btn) => {
     isEdited = true;
   });
 });
+
+// -------------------------------------------------------------
+// ⌨️ KEYBOARD SHORTCUTS
+// -------------------------------------------------------------
+// Supports:
+//   ⌘N / Ctrl+N → New File
+//   ⌘O / Ctrl+O → Open File
+//   ⌘S / Ctrl+S → Save File
+//   ⌘Q / Ctrl+Q → Quit App
+// -------------------------------------------------------------
+
+document.addEventListener("keydown", async (event) => {
+  const isMac = navigator.platform.toUpperCase().includes("MAC");
+  const cmd = isMac ? event.metaKey : event.ctrlKey;
+
+  if (!cmd) return;
+
+  switch (event.key.toLowerCase()) {
+    case "n": // NEW
+      event.preventDefault();
+      newBtn.click();
+      break;
+
+    case "o": // OPEN
+      event.preventDefault();
+      openBtn.click();
+      break;
+
+    case "s": // SAVE
+      event.preventDefault();
+      saveBtn.click();
+      break;
+
+    case "q": // QUIT
+      event.preventDefault();
+      // You might want to warn about unsaved changes here:
+      if (isEdited) {
+        const confirmQuit = confirm("You have unsaved changes. Quit anyway?");
+        if (!confirmQuit) return;
+      }
+      window.electronAPI.quitApp();
+      break;
+  }
+});
