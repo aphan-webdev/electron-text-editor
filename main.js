@@ -69,6 +69,12 @@ ipcMain.handle('dialog:saveFile', async (event, content) => {
   }
 });
 
+// -------------------------------------------------------------
+// 🚪 HANDLE "QUIT APP" REQUEST FROM RENDERER
+// -------------------------------------------------------------
+ipcMain.handle('app:quit', () => {
+  app.quit();
+});
 
 // -------------------------------------------------------------
 // 🚀 4. START THE APP
